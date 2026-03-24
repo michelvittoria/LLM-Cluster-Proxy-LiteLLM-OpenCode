@@ -333,22 +333,6 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICE
 
 ---
 
-## 🙏 Agradecimentos
-
-- **LiteLLM Team**: Por criar uma ferramenta proxy incrível
-- **OpenCode Team**: Por desenvolver uma interface de desenvolvimento excepcional
-- **Comunidade Open Source**: Por todas as contribuições e feedback
-
----
-
-## 📞 Suporte
-
-- **Issues**: [GitHub Issues](https://github.com/michelvittoria/LLM-Cluster-Proxy-LiteLLM-OpenCode/issues)
-- **Documentação**: [Wiki do Projeto](https://github.com/michelvittoria/LLM-Cluster-Proxy-LiteLLM-OpenCode/wiki)
-- **Email**: michelvittoria@github.com
-
----
-
 **⭐ Se este projeto foi útil para você, considere dar uma estrela no GitHub!**
 
 ---
