@@ -56,7 +56,6 @@ O sistema funciona como um **middleware local** que unifica diferentes APIs de L
 | **Python** | 3.10+ | `sudo apt install python3.10` |
 | **LiteLLM** | Latest | `pip install litellm` |
 | **OpenCode** | Latest | [Instalação Oficial](https://opencode.ai) |
-| **Systemd** | - | `sudo apt install systemd` |
 
 ---
 
@@ -69,7 +68,25 @@ Crie o arquivo de configuração `~/litellm-config.yaml`:
 ```yaml
 # ~/litellm-config.yaml
 model_list:
-  - model_name: deepseek-chat
+  - model_name: cluster-osint
+    litellm_params:
+      model: gemini/gemini-2.0-flash-lite
+      api_key: "os.environ/GEMINI_API_KEY"
+      max_tokens: 8192
+
+  - model_name: cluster-osint
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: "os.environ/GROQ_API_KEY"
+      max_tokens: 4096
+
+  - model_name: cluster-osint
+    litellm_params:
+      model: openrouter/qwen/qwen-2.5-72b-instruct
+      api_key: "os.environ/OPENROUTER_API_KEY"
+      max_tokens: 4096
+
+  - model_name: cluster-osint
     litellm_params:
       model: deepseek/deepseek-chat
       api_key: "os.environ/DEEPSEEK_API_KEY"
@@ -77,26 +94,9 @@ model_list:
       max_tokens: 4096
       drop_invalid_params: true
 
-  - model_name: llama-3.3-70b-versatile
-    litellm_params:
-      model: groq/llama-3.3-70b-versatile
-      api_key: "os.environ/GROQ_API_KEY"
-      max_tokens: 4096
-
-  - model_name: qwen-2.5-72b-instruct
-    litellm_params:
-      model: openrouter/qwen/qwen-2.5-72b-instruct
-      api_key: "os.environ/OPENROUTER_API_KEY"
-      max_tokens: 4096
-
-  - model_name: gemini-2.0-flash-lite
-    litellm_params:
-      model: gemini/gemini-2.0-flash-lite
-      api_key: "os.environ/GEMINI_API_KEY"
-      max_tokens: 8192
-
 router_settings:
-  routing_strategy: simple-shuffle  # Alterna entre modelos disponíveis
+  routing_strategy: simple-shuffle
+  enable_fallbacks: true
 ```
 
 **Notas Importantes:**
@@ -111,7 +111,7 @@ Ajuste o arquivo `~/.config/opencode/opencode.json`:
 ```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "litellm/deepseek-chat",
+  "model": "litellm/cluster-osint",
   "provider": {
     "litellm": {
       "npm": "@ai-sdk/openai-compatible",
@@ -120,17 +120,12 @@ Ajuste o arquivo `~/.config/opencode/opencode.json`:
         "baseURL": "http://localhost:4000/v1"
       },
       "models": {
-        "deepseek-chat": { 
-          "name": "DeepSeek",
-          "limit": { "context": 65536, "output": 4096 } 
-        },
-        "llama-3.3-70b-versatile": {
-          "name": "Groq Llama",
-          "limit": { "context": 32768, "output": 4096 }
-        },
-        "qwen-2.5-72b-instruct": {
-          "name": "Qwen 2.5 (OpenRouter)",
-          "limit": { "context": 32768, "output": 4096 }
+        "cluster-osint": { 
+          "name": "Cluster Economia (Gemini > Groq > DeepSeek)", 
+          "limit": { 
+            "context": 32768, 
+            "output": 4096 
+          } 
         }
       }
     }
