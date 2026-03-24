@@ -1,0 +1,106 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "version": "1.0.0",
+  "description": "Configuração do OpenCode para uso com LiteLLM Proxy",
+  "author": "Michel Vittoria",
+  "last_updated": "2026-03-24",
+  
+  "model": "litellm/deepseek-chat",
+  "temperature": 0.7,
+  "max_tokens": 4096,
+  
+  "provider": {
+    "litellm": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LiteLLM-Proxy",
+      "version": "1.0.0",
+      "description": "Proxy unificado para múltiplos provedores LLM",
+      "options": {
+        "baseURL": "http://localhost:4000/v1",
+        "timeout": 60000,
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      },
+      "models": {
+        "deepseek-chat": {
+          "name": "DeepSeek Chat",
+          "description": "Modelo especializado em código e raciocínio lógico",
+          "provider": "DeepSeek",
+          "limit": {
+            "context": 65536,
+            "output": 4096
+          },
+          "capabilities": ["code", "reasoning", "math"],
+          "suggested_use": "Desenvolvimento de código, debugging, algoritmos"
+        },
+        "llama-3.3-70b-versatile": {
+          "name": "Groq Llama 3.3 70B",
+          "description": "Modelo versátil com alta velocidade de inferência",
+          "provider": "Groq",
+          "limit": {
+            "context": 32768,
+            "output": 4096
+          },
+          "capabilities": ["general", "creative", "analysis"],
+          "suggested_use": "Texto geral, criatividade, análise"
+        },
+        "qwen-2.5-72b-instruct": {
+          "name": "Qwen 2.5 72B Instruct",
+          "description": "Modelo poderoso para instruções complexas",
+          "provider": "OpenRouter",
+          "limit": {
+            "context": 32768,
+            "output": 4096
+          },
+          "capabilities": ["instruction", "complex_tasks", "multilingual"],
+          "suggested_use": "Tarefas complexas, instruções detalhadas"
+        },
+        "gemini-2.0-flash-lite": {
+          "name": "Gemini 2.0 Flash Lite",
+          "description": "Modelo leve com contexto extenso",
+          "provider": "Google",
+          "limit": {
+            "context": 128000,
+            "output": 8192
+          },
+          "capabilities": ["long_context", "summarization", "translation"],
+          "suggested_use": "Documentos longos, resumos, tradução"
+        }
+      }
+    }
+  },
+  
+  "features": {
+    "streaming": true,
+    "function_calling": true,
+    "vision": false,
+    "audio": false
+  },
+  
+  "ui": {
+    "default_model": "deepseek-chat",
+    "show_model_selector": true,
+    "show_token_count": true,
+    "auto_switch_on_failure": true,
+    "retry_count": 3
+  },
+  
+  "advanced": {
+    "cache_enabled": true,
+    "cache_ttl": 3600,
+    "rate_limit": {
+      "requests_per_minute": 60,
+      "tokens_per_minute": 100000
+    },
+    "fallback_strategy": "round_robin",
+    "health_check_interval": 30
+  },
+  
+  "notes": [
+    "Este arquivo deve ser colocado em: ~/.config/opencode/opencode.json",
+    "Substitua 'localhost:4000' pelo endereço do seu servidor LiteLLM",
+    "Certifique-se de que o proxy LiteLLM está rodando antes de usar o OpenCode",
+    "Configure as variáveis de ambiente com suas chaves API antes de iniciar"
+  ]
+}

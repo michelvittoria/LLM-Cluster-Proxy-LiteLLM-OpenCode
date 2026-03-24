@@ -1,0 +1,85 @@
+# Arquivos de configuração local
+litellm-config.local.yaml
+opencode-config.local.json
+.env
+.env.local
+.env.*.local
+
+# Arquivos de log
+*.log
+logs/
+litellm.log
+
+# Arquivos de cache
+.cache/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Variáveis de ambiente
+*.env
+!.env.example
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos temporários
+*.tmp
+*.temp
+.temp/
+
+# Arquivos de IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de virtual environment
+venv/
+env/
+.venv/
+
+# Arquivos de sistema
+systemd/litellm.service.local
+
+# Arquivos de backup
+*.bak
+*.backup
+
+# Arquivos de dados
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de teste
+test_output/
+coverage/
+.coverage
+.pytest_cache/
+
+# Arquivos do Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Arquivos do Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos do sistema operacional
+*.orig
+*.rej
+
+# Arquivos de documentação gerados
+_site/
+.sass-cache/
+.jekyll-cache/
+
+# Arquivos de usuário
+*.user
+*.suo
+*.userosscache

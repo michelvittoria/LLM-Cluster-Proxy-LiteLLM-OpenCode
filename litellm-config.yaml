@@ -1,0 +1,82 @@
+# LiteLLM Proxy Configuration
+# Configuração de cluster de modelos LLM com failover automático
+# Autor: Michel Vittoria
+# Última atualização: Março 2026
+
+model_list:
+  # DeepSeek - Excelente para código e raciocínio
+  - model_name: deepseek-chat
+    litellm_params:
+      model: deepseek/deepseek-chat
+      api_key: "os.environ/DEEPSEEK_API_KEY"
+      api_base: https://api.deepseek.com
+      max_tokens: 4096
+      drop_invalid_params: true
+      temperature: 0.7
+      timeout: 30
+
+  # Groq Llama 3.3 - Alta velocidade de inferência
+  - model_name: llama-3.3-70b-versatile
+    litellm_params:
+      model: groq/llama-3.3-70b-versatile
+      api_key: "os.environ/GROQ_API_KEY"
+      max_tokens: 4096
+      temperature: 0.7
+      timeout: 30
+
+  # OpenRouter Qwen 2.5 - Excelente para tarefas complexas
+  - model_name: qwen-2.5-72b-instruct
+    litellm_params:
+      model: openrouter/qwen/qwen-2.5-72b-instruct
+      api_key: "os.environ/OPENROUTER_API_KEY"
+      max_tokens: 4096
+      temperature: 0.7
+      timeout: 45
+
+  # Google Gemini - Maior contexto disponível
+  - model_name: gemini-2.0-flash-lite
+    litellm_params:
+      model: gemini/gemini-2.0-flash-lite
+      api_key: "os.environ/GEMINI_API_KEY"
+      max_tokens: 8192
+      temperature: 0.7
+      timeout: 60
+
+# Configurações do router
+router_settings:
+  routing_strategy: simple-shuffle  # Alterna entre modelos disponíveis
+  num_retries: 3                    # Número de tentativas em caso de falha
+  timeout: 60                       # Timeout global em segundos
+  retry_delay: 2                    # Delay entre tentativas em segundos
+
+# Configurações do servidor
+general_settings:
+  host: "0.0.0.0"                   # Escuta em todas as interfaces
+  port: 4000                        # Porta do servidor
+  debug: false                      # Modo debug (habilitar para troubleshooting)
+  drop_params: true                 # Remove parâmetros inválidos das requisições
+  max_parallel_requests: 10         # Número máximo de requisições paralelas
+
+# Configurações de cache (opcional)
+# cache:
+#   type: "redis"                   # Tipo de cache (redis, in_memory)
+#   host: "localhost"
+#   port: 6379
+#   ttl: 3600                       # Time-to-live em segundos
+
+# Configurações de logging
+logging:
+  level: "INFO"                     # DEBUG, INFO, WARNING, ERROR
+  format: "json"                    # Formato dos logs (json, text)
+  file: "/home/USUARIO/litellm.log" # Arquivo de log (substituir USUARIO)
+  max_size: "100MB"                 # Tamanho máximo do arquivo de log
+  backup_count: 5                   # Número de backups a manter
+
+# Notas:
+# 1. Substitua "USUARIO" pelo seu nome de usuário real
+# 2. Configure as variáveis de ambiente antes de iniciar o proxy:
+#    export DEEPSEEK_API_KEY="sua-chave"
+#    export GROQ_API_KEY="sua-chave"
+#    export OPENROUTER_API_KEY="sua-chave"
+#    export GEMINI_API_KEY="sua-chave"
+# 3. Para testar: litellm --config litellm-config.yaml --port 4000 --drop_params
