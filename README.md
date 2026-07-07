@@ -327,12 +327,6 @@ Contribuições são bem-vindas! Siga estes passos:
 
 ---
 
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
 **⭐ Se este projeto foi útil para você, considere dar uma estrela no GitHub!**
 
 ---
