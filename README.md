@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 ![Architecture](https://img.shields.io/badge/Architecture-Microservices-orange)
 
-**Uma solução resiliente de cluster de modelos de linguagem com failover automático e transparência total de modelos.**
+**Uma solução de cluster de modelos de linguagem com failover automático e transparência total de modelos.**
 
 ---
 
